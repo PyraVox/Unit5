@@ -1,19 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author Michael
- */
+import java.util.ArrayList;
+import java.util.ListIterator;
+import javax.swing.JOptionPane;
 public class TaskGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TaskGUI
-     */
+    ArrayList list;
+    ListIterator li;
+    int curtask, tottask;
+    Task t;
+    
     public TaskGUI() {
         initComponents();
+        
+        list=new ArrayList();
+        li=list.listIterator();
+        curtask=0;
+        tottask=0;
     }
 
     /**
@@ -29,11 +30,29 @@ public class TaskGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtdesc = new javax.swing.JTextArea();
+        txtdes = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblctask = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblttask = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        btnfirst = new javax.swing.JButton();
+        btnprev = new javax.swing.JButton();
+        btnnext = new javax.swing.JButton();
+        btnlast = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        mnuprogram = new javax.swing.JMenu();
+        mnushowall = new javax.swing.JMenuItem();
+        mnuexit = new javax.swing.JMenuItem();
+        mnuedit = new javax.swing.JMenu();
+        mnureplace = new javax.swing.JMenuItem();
+        mnuremove = new javax.swing.JMenuItem();
+        mnurestore = new javax.swing.JMenuItem();
+        mnuclear = new javax.swing.JMenuItem();
+        mnuinsert = new javax.swing.JMenu();
+        mnubefore = new javax.swing.JMenuItem();
+        mnuafter = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,45 +60,149 @@ public class TaskGUI extends javax.swing.JFrame {
 
         jLabel2.setText("Description:");
 
-        txtdesc.setColumns(20);
-        txtdesc.setRows(5);
-        jScrollPane1.setViewportView(txtdesc);
+        txtdes.setColumns(20);
+        txtdes.setRows(5);
+        jScrollPane1.setViewportView(txtdes);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel3.setText("Current Task:");
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("N/A");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblctask.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblctask.setText("N/A");
+        lblctask.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel5.setText("jLabel5");
+        jLabel5.setText("Total Tasks");
 
-        jLabel6.setText("jLabel6");
+        lblttask.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblttask.setText("0");
+        lblttask.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblctask, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblttask, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lblctask, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(lblttask, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        btnfirst.setText("|<");
+
+        btnprev.setText("<");
+
+        btnnext.setText(">");
+
+        btnlast.setText(">|");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnfirst)
+                .addGap(18, 18, 18)
+                .addComponent(btnprev)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnnext)
+                .addGap(18, 18, 18)
+                .addComponent(btnlast)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnlast)
+                    .addComponent(btnnext)
+                    .addComponent(btnprev)
+                    .addComponent(btnfirst))
+                .addGap(0, 14, Short.MAX_VALUE))
+        );
+
+        mnuprogram.setText("Program");
+
+        mnushowall.setText("Show All Tasks");
+        mnuprogram.add(mnushowall);
+
+        mnuexit.setText("Exit");
+        mnuprogram.add(mnuexit);
+
+        jMenuBar1.add(mnuprogram);
+
+        mnuedit.setText("Edit");
+
+        mnureplace.setText("Replace This as Current Task");
+        mnuedit.add(mnureplace);
+
+        mnuremove.setText("Remove Current Task");
+        mnuedit.add(mnuremove);
+
+        mnurestore.setText("Restore Current Task to Screen");
+        mnuedit.add(mnurestore);
+
+        mnuclear.setText("Clear Screen");
+        mnuedit.add(mnuclear);
+
+        jMenuBar1.add(mnuedit);
+
+        mnuinsert.setText("Insert");
+
+        mnubefore.setText("Before Current Task");
+        mnuinsert.add(mnubefore);
+
+        mnuafter.setText("After Current Task");
+        mnuinsert.add(mnuafter);
+
+        jMenuBar1.add(mnuinsert);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jScrollPane1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 27, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,21 +215,155 @@ public class TaskGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+     private void btnfirstActionPerformed(java.awt.event.ActionEvent evt) {
+        if(curtask==tottask) return;
+        while(li.hasPrevious());
+        li.next();
+        t=(Task)li.previous();
+        curtask=tottask;
+        lblctask.setText("" +curtask);
+        txtname.setText(t.getName());
+        txtdes.setText(t.getDescription());
+    }
+     private void btnlastActionPerformed(java.awt.event.ActionEvent evt) {
+        if(curtask==tottask) return;
+        while(li.hasNext());
+        li.next();
+        t=(Task)li.previous();
+        curtask=tottask;
+        lblctask.setText("" +curtask);
+        txtname.setText(t.getName());
+        txtdes.setText(t.getDescription());
+    }
+       private void btnnextActionPerformed(java.awt.event.ActionEvent evt) {
+        if(curtask==tottask) return;
+        curtask++;
+        lblctask.setText("" +curtask);
+        li.next();
+        li.next();
+        t=(Task)li.previous();
+        txtname.setText(t.getName());
+        txtdes.setText(t.getDescription());
+    }
+        private void btnprevActionPerformed(java.awt.event.ActionEvent evt) {
+        if (curtask==0) return;
+        curtask--;
+        lblctask.setText("" +curtask);
+        li.previous();
+        t=(Task)li.next();
+        txtname.setText(t.getName());
+        txtdes.setText(t.getDescription());
+    }
+        private void mnushowallActionPerformed(java.awt.event.ActionEvent evt) {
+        String result="";
+        for (int x=0; x<list.size(); x++){
+            t=(Task)list.get(x);
+            result+="Task" + (x+1) + ":\n" + t.toString() + "\n";
+        }
+        
+        JOptionPane.showMessageDialog(this, result);
+    }
+         private void mnuexitActionPerformed(java.awt.event.ActionEvent evt) {
+        System.exit(0);
+    }
+          private void mnureplaceActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tottask==0){
+            JOptionPane.showMessageDialog(this,"No task to replace this with, use insert instead");
+            return;
+        } 
+        String nm=txtname.getText();
+        String d=txtdes.getText();
+        Task t= new Task(nm,d);
+        if (t.validate()==false)
+        {
+            JOptionPane.showMessageDialog(this,"Error, Please enter all information");
+            return;
+        }
+        li.next();
+        li.set(t);
+        li.previous();
+    }
+          private void mnuremoveActionPerformed(java.awt.event.ActionEvent evt) {
+        if (tottask==0) return;
+        li.next();
+        li.remove();
+        tottask--;
+        lblttask.setText(""+ tottask);
+        
+        if(tottask==0){
+            txtname.setText("");
+            txtdes.setText("");
+            curtask=0;
+            lblctask.setText("N/A");
+            return;
+        }
+        if(tottask>1){
+           li.next();
+           t=(Task)li.previous();  
+        } 
+        else if (tottask==1){
+            t=(Task)li.previous();
+            curtask=1;
+            lblctask.setText(""+ curtask);
+        }
+        txtname.setText(t.getName());
+        txtdes.setText(t.getDescription());
+    }
+     private void mnurestoreActionPerformed(java.awt.event.ActionEvent evt) {
+       txtname.setText(t.getName());
+       txtdes.setText(t.getDescription());
+    }
+     private void mnuclearActionPerformed(java.awt.event.ActionEvent evt) {
+        txtname.setText("");
+        txtdes.setText("");
+    }
+      private void mnubeforeActionPerformed(java.awt.event.ActionEvent evt) {
+        String nm=txtname.getText();
+        String d=txtdes.getText();
+        Task t= new Task(nm,d);
+        if (t.validate()==false){
+            JOptionPane.showMessageDialog(this, "Error- Must enter all information");
+            return;
+        }
+        if (tottask>0)li.previous();
+        li.add(t);
+        li.previous();
+        curtask--;
+        tottask++;
+        lblttask.setText(""+tottask);
+        lblctask.setText(""+curtask);
+        JOptionPane.showMessageDialog(this, "Task Added");
+    }
+      private void mnuafterActionPerformed(java.awt.event.ActionEvent evt) {
+        String nm=txtname.getText();
+        String d=txtdes.getText();
+        Task t= new Task(nm,d);
+        
+        if (t.validate()==false){
+            JOptionPane.showMessageDialog(this, "Error- Must enter all information");
+            return;
+        }
+        if (tottask>0)li.next();
+        li.add(t);
+        li.previous();
+        curtask++;
+        tottask++;
+        lblttask.setText(""+tottask);
+        lblctask.setText(""+curtask);
+        JOptionPane.showMessageDialog(this, "Task Added");
+    }
+      
+     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -140,14 +397,32 @@ public class TaskGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnfirst;
+    private javax.swing.JButton btnlast;
+    private javax.swing.JButton btnnext;
+    private javax.swing.JButton btnprev;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txtdesc;
+    private javax.swing.JLabel lblctask;
+    private javax.swing.JLabel lblttask;
+    private javax.swing.JMenuItem mnuafter;
+    private javax.swing.JMenuItem mnubefore;
+    private javax.swing.JMenuItem mnuclear;
+    private javax.swing.JMenu mnuedit;
+    private javax.swing.JMenuItem mnuexit;
+    private javax.swing.JMenu mnuinsert;
+    private javax.swing.JMenu mnuprogram;
+    private javax.swing.JMenuItem mnuremove;
+    private javax.swing.JMenuItem mnureplace;
+    private javax.swing.JMenuItem mnurestore;
+    private javax.swing.JMenuItem mnushowall;
+    private javax.swing.JTextArea txtdes;
     private javax.swing.JTextField txtname;
     // End of variables declaration//GEN-END:variables
 }

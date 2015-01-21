@@ -25,6 +25,12 @@ public class Task {
         this.description = description;
     }
     
+    public boolean validate(){
+        if (name == null || description == null || name.equals("") || description.equals("")) return false;
+        else return true;
+            
+    }
+    
     public String toString() {
         return "Task{" + "name=" + name + ", description=" + description + '}';
     }
